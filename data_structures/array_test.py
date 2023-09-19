@@ -1,3 +1,4 @@
+# type: ignore
 from data_structures.array import MyArrayImpl
 
 import unittest
