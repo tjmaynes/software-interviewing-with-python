@@ -16,13 +16,15 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "3.11.5"
-      - uses: actions/cache@v2
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          cache: "pip"
       - name: 🔨 Install Dependencies 🔨
         run: sudo apt-get update && sudo apt-get install make
       - name: 🚀 Deploy 🚀
         run: make deploy
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: pytest-results-3.11.5
+          path: reports/test-results-3.11.5.xml
+        # Use always() to always run this step to publish test results when there are test failures
+        if: ${{ always() }}
