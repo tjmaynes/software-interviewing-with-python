@@ -5,4 +5,10 @@ install:
 test:
 	. .venv/bin/activate; python3 -m pytest
 
-deploy: install test
+lint:
+	. .venv/bin/activate; python3 -m ruff --format=github --target-version=py311 .
+
+lint_ci:
+	. .venv/bin/activate; python3 -m ruff check --format=github --target-version=py311 .
+
+deploy: install test lint_ci

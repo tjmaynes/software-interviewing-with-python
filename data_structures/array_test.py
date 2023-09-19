@@ -1,6 +1,5 @@
 from data_structures.array import MyArrayImpl
 
-import pytest
 import unittest
 
 class TestMyArrayImpl(unittest.TestCase):
