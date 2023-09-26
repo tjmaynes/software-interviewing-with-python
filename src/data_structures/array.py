@@ -2,7 +2,7 @@ from typing import TypeVar, Generic, List
 
 T = TypeVar('T')
 
-class MyArrayImpl(Generic[T]):
+class MyArray(Generic[T]):
     def __init__(self, *items: T) -> None:
         self.__data = []
         for item in items:
