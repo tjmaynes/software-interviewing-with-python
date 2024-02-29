@@ -10,7 +10,7 @@ analyze:
 	. .venv/bin/activate; mypy src/ --strict
 
 lint:
-	. .venv/bin/activate; python3 -m ruff src/
+	. .venv/bin/activate; python3 -m ruff check src/
 
 test_ci:
 	. .venv/bin/activate; python3 -m pytest test/**/*_test.py \
@@ -18,6 +18,6 @@ test_ci:
 		--junitxml=reports/test-results-$(shell cat .python-version).xml
 
 lint_ci:
-	. .venv/bin/activate; python3 -m ruff check --format=github --target-version=py311 src/
+	. .venv/bin/activate; python3 -m ruff check --target-version=py311 src/
 
 deploy: install test_ci lint_ci analyze

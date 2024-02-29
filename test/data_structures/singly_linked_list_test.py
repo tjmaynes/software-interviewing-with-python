@@ -1,4 +1,3 @@
-# type: ignore
 from data_structures.singly_linked_list import MySinglyLinkedList
 
 import unittest
