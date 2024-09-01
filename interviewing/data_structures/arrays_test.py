@@ -1,6 +1,7 @@
-from data_structures.array import MyArray
+from arrays import MyArray
 
 import unittest
+
 
 class TestMyArray(unittest.TestCase):
     def test_init_whenGivenDefaultItems_itShouldAddItemsToArray(self):

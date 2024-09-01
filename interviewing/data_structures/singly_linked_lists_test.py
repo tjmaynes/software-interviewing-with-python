@@ -1,6 +1,7 @@
-from data_structures.singly_linked_list import MySinglyLinkedList
+from singly_linked_lists import MySinglyLinkedList
 
 import unittest
+
 
 class TestMySinglyLinkedList(unittest.TestCase):
     def test_init_whenGivenDefaultValues_itShouldAddValuesToLinkedList(self):
@@ -53,5 +54,7 @@ class TestMySinglyLinkedList(unittest.TestCase):
     def test_remove_whenGivenANonExistantValue_itShouldThrowException(self):
         sut = MySinglyLinkedList(1)
 
-        with self.assertRaisesRegex(Exception, "Value '2' not found in SinglyLinkedList"):
+        with self.assertRaisesRegex(
+            Exception, "Value '2' not found in SinglyLinkedList"
+        ):
             sut.remove(2)

@@ -4,20 +4,20 @@ install:
 
 .PHONY: test
 test:
-	. .venv/bin/activate; python3 -m pytest test/**/*_test.py
-
-analyze:
-	. .venv/bin/activate; mypy src/ --strict
+	. .venv/bin/activate; python3 -m pytest interviewing/**/*_test.py
 
 lint:
-	. .venv/bin/activate; python3 -m ruff check src/
+	. .venv/bin/activate; python3 -m ruff check interviewing/
+
+format:
+	. .venv/bin/activate; python3 -m ruff format interviewing/
 
 test_ci:
-	. .venv/bin/activate; python3 -m pytest test/**/*_test.py \
+	. .venv/bin/activate; python3 -m pytest interviewing/**/*_test.py \
 		--doctest-modules \
 		--junitxml=reports/test-results-$(shell cat .python-version).xml
 
 lint_ci:
-	. .venv/bin/activate; python3 -m ruff check --target-version=py311 src/
+	. .venv/bin/activate; python3 -m ruff check --target-version=py311 interviewing/
 
-deploy: install test_ci lint_ci analyze
+deploy: install test_ci lint_ci

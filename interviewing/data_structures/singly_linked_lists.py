@@ -1,36 +1,30 @@
-from __future__ import annotations
+class SinglyLinkedListNode:
+    def __init__(self, data, next=None):
+        self.data = data
+        self.next = next
 
-from dataclasses import dataclass
-from typing import TypeVar, Generic, List
 
-T = TypeVar('T')
-
-@dataclass
-class SinglyLinkedListNode(Generic[T]):
-    value: T
-    next: SinglyLinkedListNode[T] | None = None
-
-class MySinglyLinkedList(Generic[T]):
-    def __init__(self, *values: T) -> None:
-        self.__head: SinglyLinkedListNode[T] | None = None
-        self.__tail: SinglyLinkedListNode[T] | None = self.__head
+class MySinglyLinkedList:
+    def __init__(self, *values):
+        self.__head = None
+        self.__tail = self.__head
         self.__length = 0
 
         for value in values:
             self.append(value)
 
-    def append(self, value: T) -> None:
+    def append(self, value):
         if self.__length == 0:
             self.__head = SinglyLinkedListNode(value)
             self.__tail = self.__head
         else:
-            new_node: SinglyLinkedListNode[T] = SinglyLinkedListNode(value)
+            new_node = SinglyLinkedListNode(value)
             if self.__tail is not None:
                 self.__tail.next = new_node
                 self.__tail = new_node
         self.__length += 1
 
-    def prepend(self, value: T) -> None:
+    def prepend(self, value):
         if self.__length == 0:
             self.__head = SinglyLinkedListNode(value)
         else:
@@ -38,7 +32,7 @@ class MySinglyLinkedList(Generic[T]):
             self.__head = new_node
         self.__length += 1
 
-    def insert(self, value: T, index: int) -> None:
+    def insert(self, value, index):
         new_node = SinglyLinkedListNode(value)
         prev_node = self.__traverse_to_index(index)
 
@@ -54,13 +48,13 @@ class MySinglyLinkedList(Generic[T]):
 
         self.__length += 1
 
-    def remove(self, value: T) -> None:
-        if self.__head is not None and self.__head.value != value:
+    def remove(self, value):
+        if self.__head is not None and self.__head.data != value:
             prev_node = self.__head
 
             while prev_node.next is not None:
                 if prev_node.next is not None:
-                    if prev_node.next.value == value:
+                    if prev_node.next.data == value:
                         break
                 prev_node = prev_node.next
 
@@ -68,29 +62,30 @@ class MySinglyLinkedList(Generic[T]):
                 prev_node.next = prev_node.next.next
             else:
                 raise Exception(
-                    "Value '{}' not found in SinglyLinkedList".format(value))
+                    "Value '{}' not found in SinglyLinkedList".format(value)
+                )
         elif self.__head is not None:
             self.__head = self.__head.next
 
         self.__length -= 1
 
-    def __traverse_to_index(self, index: int) -> SinglyLinkedListNode[T] | None:
+    def __traverse_to_index(self, index):
         curr = self.__head
         for i in range(index - 1):
             if curr is not None:
                 curr = curr.next
         return curr
 
-    def size(self) -> int:
+    def size(self):
         return self.__length
 
-    def to_list(self) -> List[T]:
+    def to_list(self):
         if self.__length == 0:
             return []
 
         result = []
         curr = self.__head
         while curr is not None:
-            result.append(curr.value)
+            result.append(curr.data)
             curr = curr.next
         return result
